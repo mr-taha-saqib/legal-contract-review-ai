@@ -96,6 +96,18 @@ You now understand the risks BEFORE signing. You can negotiate better terms or c
 
 ## 🚀 Demo
 
+Real output from analysing [`tests/fixtures/sample-contract.pdf`](tests/fixtures/sample-contract.pdf) with GPT-4o:
+
+![Analysis summary: overall risk and four detected clauses](docs/screenshots/analysis.png)
+
+**Each clause links the contract text to a plain-language explanation and the specific risk factors:**
+
+![Liability clause expanded with original text, plain-language explanation and risk factors](docs/screenshots/clause.png)
+
+**Follow-up questions are answered in the context of the contract and its analysis:**
+
+![Contract Q&A answering which clause is the biggest risk](docs/screenshots/chat.png)
+
 ### Sample Analysis Output
 
 ```json
