@@ -2,6 +2,7 @@
 
 <div align="center">
 
+[![CI](https://github.com/mr-taha-saqib/legal-contract-review-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/mr-taha-saqib/legal-contract-review-ai/actions/workflows/ci.yml)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-16.0-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
@@ -156,8 +157,8 @@ You now understand the risks BEFORE signing. You can negotiate better terms or c
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/mr-taha-saqib/ai-powered-legal-contract-review-risk-analysis-assistant.git
-cd ai-powered-legal-contract-review-risk-analysis-assistant
+git clone https://github.com/mr-taha-saqib/legal-contract-review-ai.git
+cd legal-contract-review-ai
 ```
 
 ### Step 2: Install Dependencies
@@ -327,15 +328,15 @@ model ChatMessage {
 
 ## 🧪 Testing
 
-The application has been thoroughly tested with real-world contracts:
+```bash
+npm test            # Vitest unit tests
+npm run lint        # ESLint
+npm run typecheck   # TypeScript
+```
 
-✅ **Contract Upload**: Verified with PDF, DOCX, and TXT files
-✅ **AI Analysis**: Tested with complex legal agreements
-✅ **Clause Detection**: Accurately identifies all 4 clause types
-✅ **Risk Assessment**: Properly categorizes risk levels
-✅ **Q&A Chat**: Provides contextually relevant answers
-✅ **PDF Export**: Generates professional reports
-✅ **Error Handling**: Gracefully handles edge cases
+The suite parses real PDF, DOCX and TXT fixtures (`tests/fixtures/`), checks upload guards (file type, 10 MB limit, non-English and very-long-document detection), the sensitive-topic detector that triggers the enhanced legal disclaimer, and how chat context and history are assembled for the model. CI runs lint, typecheck, tests and a production build on every push.
+
+To try the app by hand, upload `tests/fixtures/sample-contract.pdf`.
 
 ---
 

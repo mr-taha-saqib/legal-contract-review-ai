@@ -44,3 +44,10 @@ next-env.d.ts
 
 # Uploaded files
 /uploads
+
+# local SQLite databases (created by `npx prisma migrate dev`)
+prisma/*.db
+prisma/*.db-journal
+
+# local editor / assistant settings
+.claude/settings.local.json

@@ -12,8 +12,6 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-
   // Initialize theme from localStorage or system preference
   const [theme, setTheme] = useState<Theme>(() => {
     // This runs only once on mount
@@ -28,37 +26,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return prefersDark ? 'dark' : 'light';
   });
 
+  // Keep the <html> class in sync with the current theme.
   useEffect(() => {
-    setMounted(true);
-    // Apply theme class to document
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
-    console.log('Toggling theme from', theme, 'to', newTheme);
-
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
-    console.log('HTML classes after toggle:', document.documentElement.className);
   };
 
-  // Prevent flash of unstyled content
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // Always provide the context: consumers such as ThemeToggle call useTheme()
+  // on their first render and would throw if the provider were withheld.
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
